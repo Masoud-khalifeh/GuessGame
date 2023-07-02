@@ -1,11 +1,8 @@
 import { Modal, StyleSheet, Text, TextInput, View } from "react-native";
 import ButtonNative from "./ButtonNative";
-import { useState } from "react";
 
 export default function Winner(props) {
-   
-
-  
+    
     return (
         <Modal animationType="slide" >
             <View style={styles.container}>

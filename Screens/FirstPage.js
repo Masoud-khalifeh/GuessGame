@@ -6,37 +6,37 @@ import uuid from 'react-native-uuid';
 import Winner from '../Components/Winner'
 
 export default function FirstPage() {
-    const [opponentGuess, setOpponentGuess] = useState("");
-    const [isWinner, setIsWinner] = useState(false);
-    const [logNum, setLogNum] = useState([]);
-    const [currentNum, setCurrentNum] = useState("");
+    const [opponentGuess, setOpponentGuess] = useState(""); //hold the amount the user said at first
+    const [isWinner, setIsWinner] = useState(false);//Checks if the game is over or not
+    const [logNum, setLogNum] = useState([]);//holds the log of guesses
+    const [currentNum, setCurrentNum] = useState("");//holds each guess to show
+    
 
-  
+//get the number from Guess component each time and add it to the logNum
     function addNum(num) {
         if (!isWinner) {
             setLogNum([...logNum, { id: uuid.v4(), num: num }]);
             setCurrentNum(num);
             if (opponentGuess == num) {
                 setIsWinner(true);
-                console.log("winnerrrrrrr")
             }
         }
-
     }
 
-    function reset(){
+    //This function resets all after clicking on play again
+    function reset() {
         setOpponentGuess("");
         setIsWinner(false);
-        setLogNum ([]);
-        setCurrentNum ("");
-    
+        setLogNum([]);
+        setCurrentNum("");
     }
 
-
+//for the first time it renders the first guess
     function firtUpdateCurrentNum(num) {
         setCurrentNum(num);
     }
 
+    //get the number from user and add it to the opponentGuess
     function addOpponentGuess(num) {
         setOpponentGuess(num);
     }
@@ -45,23 +45,25 @@ export default function FirstPage() {
 
     return (
         <View style={styles.container}>
-            {isWinner&& <Winner reset={reset} winNum={currentNum} tryNum={logNum.length}/>}
+            {isWinner && <Winner reset={reset} winNum={currentNum} tryNum={logNum.length} />}
             {!opponentGuess && <OpponentGuess add={addOpponentGuess} />}
             <View style={styles.header}>
                 <Text style={styles.headerText}>Opponent's Guess</Text>
             </View>
             <View style={styles.showNum}>
-                <Text style={styles.showNumText}>{currentNum}</Text>
+                <Text style={styles.showNumText}>{opponentGuess?currentNum:""}</Text>
             </View>
-            <View style={styles.chooseNav}>
-                <Guess add={addNum} firtUpdate={firtUpdateCurrentNum} />
-            </View >
+            {!isWinner &&
+                <View style={styles.chooseNav}>
+                    <Guess add={addNum} firtUpdate={firtUpdateCurrentNum} />
+                </View >
+            }
             <View style={styles.flatList}>
                 <FlatList
                     data={[...logNum].reverse()}
                     renderItem={({ item, index }) => (
                         <View key={item.id} style={styles.flatlistItem}>
-                            <Text>#{index+1}</Text>
+                            <Text>#{index + 1}</Text>
                             <Text >Opponent's Guess: {item.num}</Text>
                         </View>
                     )} />

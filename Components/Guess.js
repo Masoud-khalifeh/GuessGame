@@ -9,21 +9,19 @@ export default function (props) {
     const [max, setMax] = useState(99);
     const [num, setNum] = useState("");
 
-
+//Create the first guess
     useEffect(() => {
         props.firtUpdate(Math.floor(Math.random() * (max - min )) + min)
     }, [])
 
-
+//create a Num when each of MIN or Max changes
     useEffect(() => {
         const newNum = Math.floor(Math.random() * (max - min-1 )) + (min+1)
         setNum(newNum);
         props.add(newNum)
     }, [min, max])
 
-
-
-  
+    //when pressing on button change the amount of MIn or Max based on the button
     function pressHandle(navigation) {
         if (navigation === "inc") {
             setMin(num);

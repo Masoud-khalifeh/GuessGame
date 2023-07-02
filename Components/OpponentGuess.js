@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function OpponentGuess(props) {
     const [inputNum, setInputNum] = useState("");
 
+    //update the state every time after changing a character
     function changeHandler(evt) {
         setInputNum(evt)
     }
