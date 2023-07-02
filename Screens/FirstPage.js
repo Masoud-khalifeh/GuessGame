@@ -3,6 +3,7 @@ import Guess from '../Components/Guess';
 import OpponentGuess from '../Components/OpponentGuess';
 import { useState } from "react";
 import uuid from 'react-native-uuid';
+import Winner from '../Components/Winner'
 
 export default function FirstPage() {
     const [opponentGuess, setOpponentGuess] = useState("");
@@ -23,6 +24,14 @@ export default function FirstPage() {
 
     }
 
+    function reset(){
+        setOpponentGuess("");
+        setIsWinner(false);
+        setLogNum ([]);
+        setCurrentNum ("");
+    
+    }
+
 
     function firtUpdateCurrentNum(num) {
         setCurrentNum(num);
@@ -36,6 +45,7 @@ export default function FirstPage() {
 
     return (
         <View style={styles.container}>
+            {isWinner&& <Winner reset={reset} winNum={currentNum} tryNum={logNum.length}/>}
             {!opponentGuess && <OpponentGuess add={addOpponentGuess} />}
             <View style={styles.header}>
                 <Text style={styles.headerText}>Opponent's Guess</Text>
