@@ -11,32 +11,25 @@ export default function (props) {
 
 
     useEffect(() => {
-        props.firtUpdate(randNum())
+        props.firtUpdate(Math.floor(Math.random() * (max - min )) + min)
     }, [])
 
 
     useEffect(() => {
-        const newNum = Math.floor(Math.random() * (max - min + 1)) + min
+        const newNum = Math.floor(Math.random() * (max - min-1 )) + (min+1)
         setNum(newNum);
         props.add(newNum)
     }, [min, max])
 
 
 
-    function randNum(navigation = null) {
-
-
+  
+    function pressHandle(navigation) {
         if (navigation === "inc") {
             setMin(num);
-            console.log("inc, min:",num)
         } else if (navigation === "dec") {
             setMax(num);
-            console.log("dec, max:",num)
         }
-    }
-
-    function pressHandle(navigation) {
-        randNum(navigation)
     }
 
     return (

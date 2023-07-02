@@ -8,7 +8,7 @@ export default function FirstPage() {
     const [opponentGuess, setOpponentGuess] = useState("");
     const [isWinner, setIsWinner] = useState(false);
     const [logNum, setLogNum] = useState([]);
-    const [currentNum, setCurrentNum] = useState(92);
+    const [currentNum, setCurrentNum] = useState("");
 
 
     function addNum(num) {

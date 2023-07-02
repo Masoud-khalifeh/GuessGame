@@ -15,7 +15,7 @@ export default function OpponentGuess(props) {
                 <Text style={styles.textMain}>Guess My Number</Text>
                 <View style={styles.survey}>
                     <Text style={styles.text}>Enter a Number</Text>
-                    <TextInput style={styles.textInput} name="num" id="num" value={inputNum} onChange={changeHandler} placeholder="0" placeholderTextColor="white"/>
+                    <TextInput style={styles.textInput} name="num" id="num" value={inputNum} onChangeText={changeHandler} placeholder="0" placeholderTextColor="white"/>
                     <View style={styles.button}>
                         <ButtonNative onPress={() => props.add(inputNum)}>Let's Play</ButtonNative>
                     </View>
